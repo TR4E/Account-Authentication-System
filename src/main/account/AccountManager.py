@@ -1,5 +1,5 @@
 from src.main.account.Account import Account
-from src.main.utility import UtilFile
+from src.main.utility import UtilFile, UtilCrypt
 
 ACCOUNTS = {}
 
@@ -13,9 +13,15 @@ def saveAccount(account):
 
 
 def getAccount(email):
+    email = email.lower()
+
     if email in ACCOUNTS:
-        return ACCOUNTS[email.lower()]
+        return ACCOUNTS[email]
     return None
+
+
+def createPassword(email, password):
+    return UtilCrypt.encrypt(email + ":" + password)
 
 
 def loadAccounts():
@@ -25,5 +31,5 @@ def loadAccounts():
         email = tokens[0]
         password = tokens[1]
 
-        addAccount(Account(email, password, False))
+        addAccount(Account(email, password))
     pass

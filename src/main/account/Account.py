@@ -1,11 +1,11 @@
-from src.main.utility import UtilCrypt
+from src.main.account import AccountManager
 
 
 class Account:
 
-    def __init__(self, email, password, encrypt):
+    def __init__(self, email, password):
         self.EMAIL = email
-        self.PASSWORD = UtilCrypt.encrypt(email + ":" + password) if encrypt else password
+        self.PASSWORD = password
 
     def getEmail(self):
         return self.EMAIL
@@ -17,4 +17,4 @@ class Account:
         self.PASSWORD = password
 
     def isPassword(self, password):
-        return self.PASSWORD == UtilCrypt.encrypt(self.getEmail() + ":" + password)
+        return self.getPassword() == AccountManager.createPassword(self.getEmail(), password)

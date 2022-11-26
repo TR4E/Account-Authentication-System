@@ -11,7 +11,7 @@ def register():
 
     password = input("Enter a Password: ")
 
-    account = Account(email, password, True)
+    account = Account(email, AccountManager.createPassword(email, password))
 
     AccountManager.addAccount(account)
     AccountManager.saveAccount(account)
