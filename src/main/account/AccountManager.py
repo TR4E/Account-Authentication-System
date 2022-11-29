@@ -1,5 +1,7 @@
 from src.main.account.Account import Account
-from src.main.utility import UtilFile, UtilCrypt
+from src.main.account.commands import RegisterCommand, LoginCommand, ListCommand
+from src.main.command import CommandManager
+from src.main.utility import UtilCrypt, UtilJson
 
 ACCOUNTS = {}
 
@@ -9,7 +11,14 @@ def addAccount(account):
 
 
 def saveAccount(account):
-    UtilFile.writeToFile("accounts", account.getEmail() + ":" + account.getPassword())
+    data = {
+        account.getEmail(): {
+            "Password": account.getPassword(),
+            "Created": account.getCreated()
+        }
+    }
+
+    UtilJson.saveJson("accounts", data)
 
 
 def getAccount(email):
@@ -25,11 +34,13 @@ def createPassword(email, password):
 
 
 def loadAccounts():
-    for account in UtilFile.getLines("accounts"):
-        tokens = account.split(":")
+    for (key, value) in UtilJson.getJson("accounts").items():
+        account = Account(key, value["Password"], value["Created"])
 
-        email = tokens[0]
-        password = tokens[1]
+        addAccount(account)
 
-        addAccount(Account(email, password))
-    pass
+
+def registerCommands():
+    CommandManager.addCommand("list", ListCommand)
+    CommandManager.addCommand("register", RegisterCommand)
+    CommandManager.addCommand("login", LoginCommand)
