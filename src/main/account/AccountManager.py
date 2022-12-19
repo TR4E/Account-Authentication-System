@@ -18,7 +18,7 @@ def saveAccount(account):
         }
     }
 
-    UtilJson.saveJson("accounts", data)
+    UtilJson.saveJson("accounts.json", data)
 
 
 def getAccount(email):
@@ -34,7 +34,7 @@ def createPassword(email, password):
 
 
 def loadAccounts():
-    for (key, value) in UtilJson.getJson("accounts").items():
+    for (key, value) in UtilJson.getJson("accounts.json").items():
         account = Account(key, value["Password"], value["Created"])
 
         addAccount(account)

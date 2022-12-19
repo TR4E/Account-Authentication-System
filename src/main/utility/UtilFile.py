@@ -6,7 +6,7 @@ ROOT_PATH = "" if "linux" in sys.platform else (sys.path[1] + "\\")
 def getLines(file_name):
     lines = []
 
-    with open(ROOT_PATH + "src\\resources\\" + file_name + ".txt", "r") as file:
+    with open(ROOT_PATH + "src\\resources\\" + file_name, "r") as file:
         for line in file:
             lines.append(line.strip())
 
