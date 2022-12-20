@@ -15,7 +15,7 @@ class Account:
         return self.PASSWORD
 
     def setPassword(self, password):
-        self.PASSWORD = password
+        self.PASSWORD = AccountManager.createPassword(self.getEmail(), password)
 
     def isPassword(self, password):
         return self.getPassword() == AccountManager.createPassword(self.getEmail(), password)

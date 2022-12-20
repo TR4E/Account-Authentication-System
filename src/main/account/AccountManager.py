@@ -1,5 +1,5 @@
 from src.main.account.Account import Account
-from src.main.account.commands import RegisterCommand, LoginCommand, ListCommand
+from src.main.account.commands import RegisterCommand, LoginCommand, ListCommand, ChangePasswordCommand
 from src.main.command import CommandManager
 from src.main.utility import UtilCrypt, UtilJson
 
@@ -41,6 +41,7 @@ def loadAccounts():
 
 
 def registerCommands():
+    CommandManager.addCommand("changepassword", ChangePasswordCommand)
     CommandManager.addCommand("list", ListCommand)
     CommandManager.addCommand("register", RegisterCommand)
     CommandManager.addCommand("login", LoginCommand)
