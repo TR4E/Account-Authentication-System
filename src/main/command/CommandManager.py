@@ -13,8 +13,21 @@ def getCommand(name):
     return None
 
 
-def getArgument(args, index, input_text):
-    if args is None:
-        return input(input_text)
+def getCommandInfo(text):
+    command_name = text
+    args = []
 
-    return args[index]
+    if " " in command_name:
+        tokens = list(command_name.split(" "))
+
+        command_name = tokens.pop(0)
+        args = tokens
+
+    return command_name, args
+
+
+def getArgument(args, index, input_text):
+    if args is not None and len(args) > 0 and args[index] is not None:
+        return args[index]
+
+    return input(input_text)

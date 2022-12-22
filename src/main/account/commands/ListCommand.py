@@ -1,7 +1,7 @@
 from src.main.account import AccountManager
 
 
-def execute():
+def execute(args):
     emails = []
 
     for account in AccountManager.ACCOUNTS.values():
