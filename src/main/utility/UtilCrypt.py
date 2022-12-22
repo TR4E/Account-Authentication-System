@@ -22,9 +22,8 @@ def extraEncrypt(string):
     for (index, character) in enumerate(string):
         new_result = character
 
-        if character.isnumeric():
-            if index % 4 == 0:
-                new_result = replaces[int(character)]
+        if character.isnumeric() and index % 4 == 0:
+            new_result = replaces[int(character)]
 
         result += new_result
 

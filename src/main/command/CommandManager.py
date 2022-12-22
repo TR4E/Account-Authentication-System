@@ -11,3 +11,10 @@ def getCommand(name):
     if name in COMMANDS:
         return COMMANDS[name]
     return None
+
+
+def getArgument(args, index, input_text):
+    if args is None:
+        return input(input_text)
+
+    return args[index]
