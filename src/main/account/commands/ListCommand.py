@@ -7,4 +7,4 @@ def execute(args):
     for account in AccountManager.ACCOUNTS.values():
         emails.append(account.getEmail())
 
-    print("Showing " + str(len(emails)) + " Accounts: [" + (", ".join(emails)) + "]")
+    print("[*] Showing " + str(len(emails)) + " Accounts: [" + (", ".join(emails)) + "]")

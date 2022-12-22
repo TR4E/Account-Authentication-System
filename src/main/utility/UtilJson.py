@@ -19,8 +19,10 @@ def getPath(file_name):
     return file_path
 
 
-def saveJson(file_name, new_data):
-    data = dict(getJson(file_name).items())
+def saveJson(file_name, new_data, overwrite=False):
+    data = dict()
+    if not overwrite:
+        data = dict(getJson(file_name).items())
 
     for (key, value) in new_data.items():
         data[key] = value

@@ -14,5 +14,9 @@ def execute(args):
 
     if not account.isPassword(password):
         print("[-] Failed to Login: Incorrect Password")
-    else:
-        print("[+] Successfully Authenticated!")
+        return
+
+    AccountManager.removeAccount(account)
+    AccountManager.deleteAccount(account)
+
+    print("[+] Successfully Deleted Account!")

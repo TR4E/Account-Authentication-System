@@ -8,7 +8,7 @@ def execute(args):
     email = CommandManager.getArgument(args, 0, "Enter a Email: ")
 
     if AccountManager.getAccount(email) is not None:
-        print("Failed to Register: Email already exists")
+        print("[-] Failed to Register: Email already exists")
         return
 
     password = CommandManager.getArgument(args, 1, "Enter a Password: ")
@@ -18,5 +18,4 @@ def execute(args):
     AccountManager.addAccount(account)
     AccountManager.saveAccount(account)
 
-    print("Successfully Registered Account!")
-    print("Your Password: " + account.getPassword())
+    print("[+] Successfully Registered Account!")

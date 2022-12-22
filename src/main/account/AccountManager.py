@@ -1,5 +1,5 @@
 from src.main.account.Account import Account
-from src.main.account.commands import RegisterCommand, LoginCommand, ListCommand, ChangePasswordCommand
+from src.main.account.commands import RegisterCommand, LoginCommand, ListCommand, ChangePasswordCommand, DeleteCommand
 from src.main.command import CommandManager
 from src.main.utility import UtilCrypt, UtilJson
 
@@ -8,6 +8,10 @@ ACCOUNTS = {}
 
 def addAccount(account):
     ACCOUNTS[account.getEmail().lower()] = account
+
+
+def removeAccount(account):
+    ACCOUNTS.pop(account.getEmail().lower())
 
 
 def saveAccount(account):
@@ -19,6 +23,14 @@ def saveAccount(account):
     }
 
     UtilJson.saveJson("accounts.json", data)
+
+
+def deleteAccount(account):
+    data = UtilJson.getJson("accounts.json")
+
+    data.pop(account.getEmail())
+
+    UtilJson.saveJson("accounts.json", data, overwrite=True)
 
 
 def getAccount(email):
@@ -42,6 +54,7 @@ def loadAccounts():
 
 def registerCommands():
     CommandManager.addCommand("changepassword", ChangePasswordCommand)
+    CommandManager.addCommand("delete", DeleteCommand)
     CommandManager.addCommand("list", ListCommand)
     CommandManager.addCommand("register", RegisterCommand)
     CommandManager.addCommand("login", LoginCommand)
