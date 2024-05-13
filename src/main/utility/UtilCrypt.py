@@ -1,11 +1,12 @@
 import hashlib
 
+PEPPER = "A5kv$xoY56!saDg_"
 
 def encrypt(string):
     text = string
 
     for i in range(32):
-        text = hashlib.sha512(bytes(text, "UTF-8")).hexdigest()
+        text = hashlib.sha512(bytes("{}{}".format(text, PEPPER), "UTF-8")).hexdigest()
 
     text = extraEncrypt(text)
 
